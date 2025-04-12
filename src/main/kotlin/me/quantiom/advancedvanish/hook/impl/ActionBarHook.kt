@@ -38,7 +38,8 @@ class ActionBarHook : IHook {
     }
 
     private fun sendActionBarStr(player: Player, str: String) {
-        AdvancedVanish.adventure?.player(player)?.sendActionBar(str.color())
+        // AdvancedVanish.adventure?.player(player)?.sendActionBar(str.color())
+        player.sendActionBar(str.color())
     }
 
     @EventHandler
