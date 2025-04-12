@@ -354,6 +354,10 @@
                             <pattern>org.jetbrains.exposed</pattern>
                             <shadedPattern>me.quantiom.advancedvanish.shaded.exposed</shadedPattern>
                         </relocation>
+                        <relocation>
+                            <pattern>com.xyrisdev.library.scheduler</pattern>
+                            <shadedPattern>me.quantiom.advancedvanish.shaded.scheduler</shadedPattern>
+                        </relocation>
                     </relocations>
                 </configuration>
                 <executions>
