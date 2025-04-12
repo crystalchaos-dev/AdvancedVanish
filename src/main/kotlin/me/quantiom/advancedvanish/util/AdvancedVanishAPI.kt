@@ -64,9 +64,13 @@ object AdvancedVanishAPI {
                     } else Integer.MAX_VALUE
 
                     if (onJoin) {
-                        Bukkit.getScheduler().runTaskLater(AdvancedVanish.instance!!, Runnable {
-                            player.addPotionEffect(this.createEffect(duration, it[1].toInt() - 1))
-                        }, 10L)
+//                        Bukkit.getScheduler().runTaskLater(AdvancedVanish.instance!!, Runnable {
+//                            player.addPotionEffect(this.createEffect(duration, it[1].toInt() - 1))
+//                        }, 10L)
+
+                        AdvancedVanish.scheduler.runTask(player) {
+                            player.addPotionEffect(createEffect(duration, it[1].toInt() - 1))
+                        }
                     } else {
                         player.addPotionEffect(this.createEffect(duration, it[1].toInt() - 1))
                     }

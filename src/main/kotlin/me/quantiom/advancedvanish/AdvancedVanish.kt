@@ -1,6 +1,8 @@
 package me.quantiom.advancedvanish
 
 import co.aikar.commands.PaperCommandManager
+import com.xyrisdev.library.scheduler.XScheduler
+import com.xyrisdev.library.scheduler.scheduling.schedulers.TaskScheduler
 import me.quantiom.advancedvanish.command.VanishCommand
 import me.quantiom.advancedvanish.config.Config
 import me.quantiom.advancedvanish.hook.HooksManager
@@ -18,6 +20,9 @@ object AdvancedVanish {
     var instance: AdvancedVanishPlugin? = null
     var commandManager: PaperCommandManager? = null
     var adventure: BukkitAudiences? = null
+    // Folia support - begin
+    lateinit var scheduler: TaskScheduler
+    // Folia support - end
 
     fun log(level: Level, msg: String) {
         instance!!.logger.log(level, msg)
@@ -25,6 +30,10 @@ object AdvancedVanish {
 
     fun onEnable(plugin: AdvancedVanishPlugin) {
         instance = plugin
+
+        // Folia support - begin
+        scheduler = XScheduler.of(plugin);
+        // Folia support - end
 
         adventure = BukkitAudiences.create(plugin)
 

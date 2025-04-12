@@ -13,7 +13,8 @@ object UpdateChecker {
     private const val RESOURCE_ID = 86036
 
     fun getVersion(consumer: Consumer<String?>) {
-        Bukkit.getScheduler().runTaskAsynchronously(AdvancedVanish.instance!!, Runnable {
+//      Bukkit.getScheduler().runTaskAsynchronously(AdvancedVanish.instance!!, Runnable
+        AdvancedVanish.scheduler.runTaskAsynchronously {
             try {
                 URL("https://api.spigotmc.org/legacy/update.php?resource=${RESOURCE_ID}").openStream()
                     .use { inputStream ->
@@ -26,6 +27,6 @@ object UpdateChecker {
             } catch (exception: IOException) {
                 AdvancedVanish.instance!!.logger.info("Unable to check for updates: " + exception.message)
             }
-        })
+        }
     }
 }

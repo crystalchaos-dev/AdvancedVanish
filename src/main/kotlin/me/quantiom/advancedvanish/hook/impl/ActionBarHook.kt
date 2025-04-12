@@ -1,5 +1,6 @@
 package me.quantiom.advancedvanish.hook.impl
 
+import com.xyrisdev.library.scheduler.XRunnable
 import me.quantiom.advancedvanish.AdvancedVanish
 import me.quantiom.advancedvanish.config.Config
 import me.quantiom.advancedvanish.event.PlayerUnVanishEvent
@@ -10,11 +11,13 @@ import me.quantiom.advancedvanish.util.color
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
-import org.bukkit.scheduler.BukkitRunnable
 
 class ActionBarHook : IHook {
-    private val updateTask: BukkitRunnable =
-        object : BukkitRunnable() {
+//    private val updateTask: BukkitRunnable =
+//        object : BukkitRunnable()
+
+    private val updateTask: XRunnable =
+        object : XRunnable() {
             override fun run() {
                 AdvancedVanishAPI.vanishedPlayers.map(Bukkit::getPlayer).map { it!! }.forEach(::sendActionBar)
             }

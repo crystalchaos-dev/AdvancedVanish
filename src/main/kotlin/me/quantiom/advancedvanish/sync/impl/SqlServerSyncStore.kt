@@ -69,9 +69,10 @@ object SqlServerSyncStore : IServerSyncStore {
     }
 
     override fun setAsync(key: UUID, value: Boolean) {
-        Bukkit.getScheduler().runTaskAsynchronously(AdvancedVanish.instance!!, Runnable {
+        AdvancedVanish.scheduler.runTaskAsynchronously {
             try {
-                val updateQuery = "INSERT INTO advancedvanish (uuid, state) VALUES (?, ?) ON DUPLICATE KEY UPDATE state = ?"
+                val updateQuery =
+                    "INSERT INTO advancedvanish (uuid, state) VALUES (?, ?) ON DUPLICATE KEY UPDATE state = ?"
                 val preparedStatement = connection!!.prepareStatement(updateQuery)
                 preparedStatement.setString(1, key.toString())
                 preparedStatement.setBoolean(2, value)
@@ -81,6 +82,23 @@ object SqlServerSyncStore : IServerSyncStore {
                 AdvancedVanish.log(Level.SEVERE, "There was an error while attempting to make a connection with SQL: ")
                 e.printStackTrace()
             }
-        })
+        }
     }
 }
+
+//    override fun setAsync(key: UUID, value: Boolean) {
+//        Bukkit.getScheduler().runTaskAsynchronously(AdvancedVanish.instance!!, Runnable {
+//            try {
+//                val updateQuery = "INSERT INTO advancedvanish (uuid, state) VALUES (?, ?) ON DUPLICATE KEY UPDATE state = ?"
+//                val preparedStatement = connection!!.prepareStatement(updateQuery)
+//                preparedStatement.setString(1, key.toString())
+//                preparedStatement.setBoolean(2, value)
+//                preparedStatement.setBoolean(3, value)
+//                preparedStatement.executeUpdate()
+//            } catch (e: SQLException) {
+//                AdvancedVanish.log(Level.SEVERE, "There was an error while attempting to make a connection with SQL: ")
+//                e.printStackTrace()
+//            }
+//        })
+//    }
+//}
